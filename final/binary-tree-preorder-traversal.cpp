@@ -21,3 +21,23 @@ public:
         result.insert(result.end(), right_vector.begin(), right_vector.end());
     }
 };
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> result;
+        stack<TreeNode *> preorder_stack;
+        TreeNode *cur_node = root;
+        while (!preorder_stack.empty() || cur_node) {
+            if (cur_node) {
+                result.push_back(cur_node->val);
+                preorder_stack.push(cur_node->right);
+                cur_node = cur_node->left;
+            } else {
+                cur_node = preorder_stack.top();
+                preorder_stack.pop();
+            }
+        }
+        return result;
+    }
+};
