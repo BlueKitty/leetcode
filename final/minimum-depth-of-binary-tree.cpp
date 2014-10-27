@@ -10,11 +10,8 @@
 class Solution {
 public:
     void find_min_depth(TreeNode *root, int depth, int &current_min) {
-        if (depth >= current_min) return;
-        if (root == NULL) {
-            return;
-        } else if (root->left == NULL && root->right == NULL) {
-            // leaf node
+        if (depth >= current_min || root == NULL) return;
+        if (root->left == NULL && root->right == NULL) {
             current_min = min(current_min, depth + 1);
         } else {
             find_min_depth(root->left, depth + 1, current_min);
