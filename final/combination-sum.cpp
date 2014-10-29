@@ -9,15 +9,16 @@ public:
         for (int i = 0; i < n; ++i) dfs_stack.push({i, false});
         while (!dfs_stack.empty()) {
             auto& idx_pair = dfs_stack.top();
-            sum += sorted[idx_pair.first];
-            idx_pair.second = true; // mark as visited
-            solution.push_back(sorted[idx_pair.first]);
-            if (sum == target) {
-                results.push_back(solution);
-            } else if (sum < target) {
-                for (int i = idx_pair.first; i < n; ++i) dfs_stack.push({i, false});
-            }
-            while (!dfs_stack.empty() && dfs_stack.top().second == true) {
+            if (!idx_pair.second) { /* not visited */
+                sum += sorted[idx_pair.first];
+                idx_pair.second = true; // mark as visited
+                solution.push_back(sorted[idx_pair.first]);
+                if (sum == target) {
+                    results.push_back(solution);
+                } else if (sum < target) {
+                    for (int i = idx_pair.first; i < n; ++i) dfs_stack.push({i, false});
+                }
+            } else {
                 sum -= solution.back();
                 dfs_stack.pop();
                 solution.pop_back();

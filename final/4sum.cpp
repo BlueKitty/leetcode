@@ -11,15 +11,11 @@ public:
                 auto c = b + 1, d = sorted.end() - 1;
                 while (c < d) {
                     int sum = *a + *b + *c + *d;
-                    if (sum < target) {
+                    if (sum == target) result.push_back({*a, *b, *c, *d});
+                    if (sum <= target)
                         do { ++c; } while (c != sorted.end() && *c == *(c - 1));
-                    } else if (sum > target) {
-                        do { --d; } while (d > b && *d == *(d + 1));
-                    } else {
-                        result.push_back({*a, *b, *c, *d});
-                        do { ++c; } while (c != sorted.end() && *c == *(c - 1));
-                        do { --d; } while (d > b && *d == *(d + 1));
-                    }
+                    if (sum >= target)
+                        do { --d; } while (d > c && *d == *(d + 1));
                 }
                 do { ++b; } while (b != sorted.end() && *b == *(b - 1));
             }
