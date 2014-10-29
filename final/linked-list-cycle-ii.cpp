@@ -12,11 +12,11 @@ public:
         ListNode *fast = head, *slow = head;
         do {
             if (!fast || !(fast->next))
-                return NULL; // no cycle
+                return NULL; /* no cycle */
             fast = fast->next->next;
             slow = slow->next;
         } while (fast != slow);
-        // cycle detected
+        /* cycle detected */
         slow = head;
         while (slow != fast) {
             slow = slow->next;
