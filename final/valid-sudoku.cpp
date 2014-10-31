@@ -11,11 +11,9 @@ public:
                 if (value == '.') continue;
                 int number = value - '1';
                 int square_index = i / 3 + j / 3 * 3;
-                if (row_visited[i][number]) return false;
-                if (col_visited[j][number]) return false;
-                if (square_visited[square_index][number]) return false;
-                row_visited[i][number] = true;
-                col_visited[j][number] = true;
+                if (row_visited[i][number] || col_visited[j][number]
+                    ||square_visited[square_index][number]) return false;
+                row_visited[i][number] = col_visited[j][number] = true;
                 square_visited[square_index][number] = true;
             }
         }
